@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wuji 289 – Sacred Reading</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: black;
+  color: #gold;
+  text-align: center;
+}
+
+h1 {
+  color: gold;
+  margin-top: 50px;
+  font-size: 40px;
+}
+
+p {
+  color: #ddd;
+}
+
+button {
+  padding: 12px 25px;
+  margin: 10px;
+  border: none;
+  background: gold;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+button:hover {
+  background: #ffd700;
+}
+
+.card {
+  margin-top: 30px;
+}
+
+img {
+  width: 200px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px gold;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>🔮 Wuji 289 – Sacred Reading</h1>
+<p>無極殿 | พลังต้นกำเนิดแห่งการหยั่งรู้</p>
+
+<p>เปิดไพ่ อ่านพลัง เชื่อมต่อคำตอบของคุณ</p>
+
+<button onclick="drawCard()">เปิดไพ่</button>
+
+<div class="card" id="result"></div>
+
+<script>
+function drawCard(){
+
+let cards = [
+{
+name: "The Sun ☀️",
+img: "https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_Sun.jpg",
+text: "พลังบวก ความสำเร็จ และความชัดเจนกำลังเข้ามา"
+},
+{
+name: "The Moon 🌙",
+img: "https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_Moon.jpg",
+text: "ฟังเสียงข้างใน ระวังความไม่ชัดเจน"
+},
+{
+name: "The Star ⭐",
+img: "https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_17_Star.jpg",
+text: "ความหวังใหม่ การเยียวยา และพลังจักรวาลกำลังหนุนคุณ"
+}
+];
+
+let random = Math.floor(Math.random() * cards.length);
+let card = cards[random];
+
+document.getElementById("result").innerHTML = `
+<h2>${card.name}</h2>
+<img src="${card.img}">
+<p>${card.text}</p>
+`;
+
+}
+</script>
+
+</body>
+</html>
