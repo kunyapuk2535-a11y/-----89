@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌙 Self Growth Journal</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    color:white;
+    background: radial-gradient(circle at top,#001428,#000);
+    overflow:hidden;
+}
+
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
+.container{
+    text-align:center;
+    padding-top:40px;
+}
+
+h1{
+    margin-bottom:10px;
+}
+
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:10px;
+    background:#1e90ff;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    box-shadow:0 0 10px #1e90ff;
+}
+
+.box{
+    margin-top:20px;
+    max-width:420px;
+    margin-left:auto;
+    margin-right:auto;
+    padding:18px;
+    border-radius:12px;
+    border:1px solid #1e90ff;
+    background:rgba(0,180,255,0.08);
+    line-height:1.8;
+    box-shadow:0 0 12px rgba(0,180,255,0.2);
+    text-align:left;
+}
+.small{
+    opacity:0.8;
+    font-size:13px;
+    margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="container">
+    <h1>🌙 Self Growth Journal</h1>
+    <div class="small">พัฒนาตัวเองทีละนิด แต่ต่อเนื่อง 🌱</div>
+
+    <button onclick="generate()">✨ เปิดพลังวันนี้</button>
+
+    <div class="box" id="output">
+        กดปุ่มเพื่อดู “พลังของวันนี้”
+    </div>
+</div>
+
+<script>
+
+// ===== ดาวพื้นหลัง =====
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let stars=[];
+for(let i=0;i<120;i++){
+    stars.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        r:Math.random()*1.5,
+        d:Math.random()*1
+    });
+}
+
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="white";
+
+    stars.forEach(s=>{
+        ctx.beginPath();
+        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.fill();
+
+        s.y+=s.d;
+        if(s.y>canvas.height){
+            s.y=0;
+            s.x=Math.random()*canvas.width;
+        }
+    });
+
+    requestAnimationFrame(animate);
+}
+animate();
+
+
+// ===== ระบบพัฒนาตัวเอง =====
+const focus = [
+"โฟกัสสิ่งที่ควบคุมได้",
+"ใจดีกับตัวเองมากขึ้น",
+"หยุดคิดวนเรื่องเดิม",
+"กล้าพูดความรู้สึก",
+"อยู่กับปัจจุบัน"
+];
+
+const habit = [
+"พักผ่อนให้พอ",
+"เริ่มทำทีละเล็กแต่ทำต่อเนื่อง",
+"ลดการเปรียบเทียบตัวเอง",
+"จัดระเบียบชีวิตเล็ก ๆ",
+"ฝึกหายใจลึก ๆ เมื่อเครียด"
+];
+
+const mission = [
+"เขียนสิ่งที่รู้สึกตอนนี้ 3 บรรทัด",
+"ทำสิ่งค้างคา 1 อย่าง",
+"ดูแลร่างกายตัวเองวันนี้",
+"พูดคำดี ๆ กับตัวเอง",
+"เคลียร์พื้นที่รอบตัว 1 จุด"
+];
+
+function rand(seed){
+    let x=Math.sin(seed)*10000;
+    return x-Math.floor(x);
+}
+
+function getSeed(){
+    let d=new Date();
+    return d.getFullYear()+d.getMonth()+d.getDate();
+}
+
+function generate(){
+
+    let seed=getSeed();
+
+    let f=focus[Math.floor(rand(seed)*focus.length)];
+    let h=habit[Math.floor(rand(seed+1)*habit.length)];
+    let m=mission[Math.floor(rand(seed+2)*mission.length)];
+    let energy=Math.floor(rand(seed+3)*101);
+
+    document.getElementById("output").innerHTML=`
+        🌱 สิ่งที่ควรโฟกัส:<br> ${f}<br><br>
+        🧠 นิสัยที่ควรฝึก:<br> ${h}<br><br>
+        🔥 พลังใจวันนี้:<br> ${energy}%<br><br>
+        📝 ภารกิจวันนี้:<br> ${m}
+    `;
+}
+
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌙 Self Growth App</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background: radial-gradient(circle at top,#001428,#000);
+    color:white;
+}
+
+.container{
+    max-width:500px;
+    margin:auto;
+    padding:20px;
+    text-align:center;
+}
+
+button{
+    padding:10px 15px;
+    margin:5px;
+    border:none;
+    border-radius:8px;
+    background:#1e90ff;
+    color:white;
+    cursor:pointer;
+}
+
+input{
+    width:80%;
+    padding:10px;
+    border-radius:8px;
+    border:none;
+    margin-top:10px;
+}
+
+.box{
+    margin-top:20px;
+    text-align:left;
+}
+
+.item{
+    background:rgba(0,180,255,0.1);
+    border:1px solid #1e90ff;
+    padding:10px;
+    border-radius:10px;
+    margin-bottom:10px;
+}
+.date{
+    font-size:12px;
+    opacity:0.7;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>🌙 Self Growth Journal</h2>
+
+    <p>บันทึกพลังของวันนี้</p>
+
+    <input id="text" placeholder="วันนี้รู้สึกยังไง / ทำอะไรสำเร็จ...">
+
+    <br>
+
+    <button onclick="save()">💾 บันทึก</button>
+    <button onclick="clearAll()">🗑 ลบทั้งหมด</button>
+
+    <div class="box" id="list"></div>
+</div>
+
+<script>
+
+// ===== โหลดข้อมูล =====
+function getData(){
+    return JSON.parse(localStorage.getItem("growth") || "[]");
+}
+
+// ===== บันทึก =====
+function save(){
+    let text=document.getElementById("text").value;
+    if(!text) return;
+
+    let data=getData();
+
+    data.unshift({
+        text:text,
+        date:new Date().toLocaleString("th-TH")
+    });
+
+    localStorage.setItem("growth",JSON.stringify(data));
+
+    document.getElementById("text").value="";
+    render();
+}
+
+// ===== ลบทั้งหมด =====
+function clearAll(){
+    localStorage.removeItem("growth");
+    render();
+}
+
+// ===== render =====
+function render(){
+    let data=getData();
+    let list=document.getElementById("list");
+
+    list.innerHTML="";
+
+    if(data.length===0){
+        list.innerHTML="<p>ยังไม่มีข้อมูล</p>";
+        return;
+    }
+
+    data.forEach((item,index)=>{
+        let div=document.createElement("div");
+        div.className="item";
+
+        div.innerHTML=`
+            <div class="date">📅 ${item.date}</div>
+            <div>🌱 ${item.text}</div>
+            <button onclick="removeItem(${index})">ลบ</button>
+        `;
+
+        list.appendChild(div);
+    });
+}
+
+// ===== ลบรายอัน =====
+function removeItem(index){
+    let data=getData();
+    data.splice(index,1);
+    localStorage.setItem("growth",JSON.stringify(data));
+    render();
+}
+
+// ===== โหลดตอนเปิดเว็บ =====
+render();
+
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌙 Self Growth</title>
+
+<!-- สำคัญสำหรับ PWA -->
+<link rel="manifest" href="manifest.json">
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background: radial-gradient(circle at top,#001428,#000);
+    color:white;
+}
+
+.container{
+    max-width:500px;
+    margin:auto;
+    padding:20px;
+    text-align:center;
+}
+
+button{
+    padding:10px 15px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:#1e90ff;
+    color:white;
+}
+
+input{
+    width:85%;
+    padding:10px;
+    border-radius:8px;
+    border:none;
+    margin-top:10px;
+}
+
+.item{
+    margin-top:10px;
+    padding:10px;
+    background:rgba(0,180,255,0.1);
+    border:1px solid #1e90ff;
+    border-radius:10px;
+    text-align:left;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>🌙 Self Growth App</h2>
+
+    <input id="text" placeholder="บันทึกวันนี้...">
+
+    <button onclick="save()">💾 บันทึก</button>
+
+    <div id="list"></div>
+</div>
+
+<script>
+
+function getData(){
+    return JSON.parse(localStorage.getItem("growth") || "[]");
+}
+
+function save(){
+    let text=document.getElementById("text").value;
+    if(!text) return;
+
+    let data=getData();
+
+    data.unshift({
+        text,
+        date:new Date().toLocaleString("th-TH")
+    });
+
+    localStorage.setItem("growth",JSON.stringify(data));
+    document.getElementById("text").value="";
+    render();
+}
+
+function render(){
+    let list=document.getElementById("list");
+    let data=getData();
+
+    list.innerHTML="";
+
+    data.forEach(item=>{
+        let div=document.createElement("div");
+        div.className="item";
+        div.innerHTML=`📅 ${item.date}<br>🌱 ${item.text}`;
+        list.appendChild(div);
+    });
+}
+
+render();
+</script>
+
+</body>
+</html>
+
