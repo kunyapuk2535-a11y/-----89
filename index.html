@@ -259,6 +259,197 @@ function drawCards() {
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔮 จักรวาลเนื้อคู่</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    overflow: hidden;
+    background: radial-gradient(circle at top, #001428, #000000);
+}
+
+/* ดาว */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* กล่อง */
+.container {
+    text-align: center;
+    padding-top: 40px;
+}
+
+/* ปุ่ม */
+button {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 10px;
+    background: #1e90ff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #1e90ff;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* ไพ่ */
+.cards {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 110px;
+    height: 160px;
+    border-radius: 12px;
+    background: rgba(0, 180, 255, 0.1);
+    border: 1px solid rgba(0, 180, 255, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    font-size: 12px;
+    transform: translateY(40px);
+    opacity: 0;
+    transition: 0.6s ease;
+    box-shadow: 0 0 15px rgba(0,180,255,0.2);
+}
+
+.card.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.result {
+    margin-top: 25px;
+    font-size: 18px;
+    color: #7fd3ff;
+    text-shadow: 0 0 10px #1e90ff;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="container">
+    <h1>🔮 ไพ่ 5 ใบ เนื้อคู่จักรวาล</h1>
+
+    <button onclick="playSound(); drawCards();">
+        ✨ เปิดพลังจักรวาล
+    </button>
+
+    <div class="cards" id="cards"></div>
+    <div class="result" id="result"></div>
+</div>
+
+<audio id="sound">
+    <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3">
+</audio>
+
+<script>
+// ===== ดาวเคลื่อนไหว =====
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let stars = [];
+
+for (let i = 0; i < 120; i++) {
+    stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.5,
+        d: Math.random() * 1
+    });
+}
+
+function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+
+    stars.forEach(s => {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        s.y += s.d;
+        if (s.y > canvas.height) {
+            s.y = 0;
+            s.x = Math.random() * canvas.width;
+        }
+    });
+
+    requestAnimationFrame(drawStars);
+}
+drawStars();
+
+// ===== ไพ่ =====
+const meanings = [
+    "เนื้อคู่กำลังเข้าใกล้",
+    "มีคนคิดถึงคุณแรงมาก",
+    "ความรักกำลังถูกเปิดทาง",
+    "อดีตยังส่งพลังถึงกัน",
+    "จะเจอผ่านงานหรือการเดินทาง",
+    "ความสัมพันธ์กำลังเปลี่ยน",
+    "ต้องเลือกด้วยหัวใจ",
+    "พลังดึงดูดกำลังทำงาน"
+];
+
+function playSound() {
+    document.getElementById("sound").play();
+}
+
+function drawCards() {
+    const cards = document.getElementById("cards");
+    const result = document.getElementById("result");
+
+    cards.innerHTML = "";
+    let selected = [];
+
+    for (let i = 0; i < 5; i++) {
+        let text = meanings[Math.floor(Math.random() * meanings.length)];
+        selected.push(text);
+
+        let div = document.createElement("div");
+        div.className = "card";
+        div.innerText = "🃏\n" + text;
+        cards.appendChild(div);
+
+        setTimeout(() => {
+            div.classList.add("show");
+        }, i * 200);
+    }
+
+    result.innerHTML =
+        "💫 เนื้อคู่จักรวาล: " +
+        selected[Math.floor(Math.random() * selected.length)];
+}
+</script>
+
+</body>
+</html>
 
 
 
