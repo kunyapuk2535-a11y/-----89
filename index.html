@@ -10,7 +10,7 @@ body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background: black;
-  color: #gold;
+  color: gold;
   text-align: center;
 }
 
@@ -49,21 +49,25 @@ img {
   box-shadow: 0 0 20px gold;
 }
 </style>
-
 </head>
 
 <body>
 
 <h1>🔮 Wuji 289 – Sacred Reading</h1>
 <p>無極殿 | พลังต้นกำเนิดแห่งการหยั่งรู้</p>
-
 <p>เปิดไพ่ อ่านพลัง เชื่อมต่อคำตอบของคุณ</p>
 
 <button onclick="drawCard()">เปิดไพ่</button>
 
 <div class="card" id="result"></div>
 
+<!-- 💖 ขอพรความรัก -->
+<h2>💖 ขอพรความรัก</h2>
+<button onclick="loveWish()">รับคำพร</button>
+<p id="loveResult"></p>
+
 <script>
+
 function drawCard(){
 
 let cards = [
@@ -92,9 +96,29 @@ document.getElementById("result").innerHTML = `
 <img src="${card.img}">
 <p>${card.text}</p>
 `;
-
 }
+
+// 💖 ฟังก์ชันขอพรความรัก
+function loveWish() {
+  const wishes = [
+    "รักที่ดีจะไม่ทำให้เธอต้องสงสัยคุณค่าตัวเอง",
+    "คนที่ใช่จะเห็นค่าหัวใจเธอ",
+    "ปล่อยความเจ็บเก่า แล้วเปิดรับรักใหม่",
+    "ความรักที่มั่นคงกำลังเดินทางมา",
+    "เริ่มจากรักตัวเอง แล้วทุกอย่างจะชัดขึ้น",
+    "หัวใจเธอกำลังถูกเยียวยาอย่างงดงาม"
+  ];
+
+  const text = wishes[Math.floor(Math.random() * wishes.length)];
+  document.getElementById("loveResult").innerText = text;
+}
+
 </script>
 
 </body>
 </html>
+
+
+
+
+
