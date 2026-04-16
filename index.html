@@ -117,7 +117,148 @@ function loveWish() {
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔮 ไพ่จักรวาล - เนื้อคู่</title>
 
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+    background: black;
+}
+
+/* พื้นหลังจักรวาล */
+.stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url("https://i.imgur.com/3MZ6XWn.jpg") no-repeat center center/cover;
+    z-index: -1;
+    filter: brightness(0.5);
+}
+
+/* กล่อง */
+.container {
+    padding: 30px;
+}
+
+/* ไพ่ */
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 100px;
+    height: 150px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    background: rgba(255,255,255,0.2);
+}
+
+/* ปุ่ม */
+button {
+    padding: 12px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    background: purple;
+    color: white;
+}
+
+.result {
+    margin-top: 20px;
+    font-size: 18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<div class="container">
+    <h1>🔮 ไพ่ 5 ใบ - สุ่มเนื้อคู่</h1>
+
+    <button onclick="playSound(); drawCards();">
+        🔊 เปิดพลังจักรวาล
+    </button>
+
+    <div class="cards" id="cards"></div>
+
+    <div class="result" id="result"></div>
+</div>
+
+<!-- เสียง -->
+<audio id="sound">
+    <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const meanings = [
+    "ความรักกำลังเริ่มต้น",
+    "มีคนแอบคิดถึงคุณ",
+    "อดีตยังผูกพัน",
+    "เนื้อคู่กำลังใกล้เข้ามา",
+    "ต้องเลือกเส้นทางหัวใจ",
+    "พลังงานความรักนิ่งขึ้น",
+    "จะพบคนสำคัญผ่านงาน",
+    "ความสัมพันธ์กำลังเปลี่ยน"
+];
+
+function playSound() {
+    document.getElementById("sound").play();
+}
+
+function drawCards() {
+    const cards = document.getElementById("cards");
+    const result = document.getElementById("result");
+
+    cards.innerHTML = "";
+
+    let selected = [];
+
+    for (let i = 0; i < 5; i++) {
+        let text = meanings[Math.floor(Math.random() * meanings.length)];
+        selected.push(text);
+
+        let div = document.createElement("div");
+        div.className = "card";
+        div.innerText = "🃏\n" + text;
+        cards.appendChild(div);
+    }
+
+    result.innerHTML =
+        "💫 พลังเนื้อคู่: " +
+        selected[Math.floor(Math.random() * selected.length)];
+}
+</script>
+
+</body>
+</html>
 
 
 
