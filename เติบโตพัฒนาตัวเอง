@@ -407,24 +407,67 @@ function save(){
     document.getElementById("text").value="";
     render();
 }
+function deleteItem(index){
+
+    let data = getData();
+
+    data.splice(index,1);
+
+    localStorage.setItem("growth", JSON.stringify(data));
+
+    render();
+
+}
 
 function render(){
-    let list=document.getElementById("list");
-    let data=getData();
+
+    let list = document.getElementById("list");
+
+    let search = document.getElementById("search");
+
+    let count = document.getElementById("count");
+
+    let keyword = search ? search.value.toLowerCase() : "";
+
+    let data = getData();
 
     list.innerHTML="";
 
-    data.forEach(item=>{
-        let div=document.createElement("div");
+    let filtered = data.filter(item =>
+
+        item.text.toLowerCase().includes(keyword)
+
+    );
+
+    if(count){
+
+        count.innerText = "ทั้งหมด " + filtered.length + " รายการ";
+
+    }
+
+    filtered.forEach((item,index)=>{
+
+        let div = document.createElement("div");
+
         div.className="item";
-        div.innerHTML=`📅 ${item.date}<br>🌱 ${item.text}`;
+
+        div.innerHTML = `
+
+            📅 ${item.date}<br>
+
+            ✨ ${item.text}<br><br>
+
+            <button onclick="deleteItem(${index})">🗑 ลบ</button>
+
+        `;
+
         list.appendChild(div);
+
     });
+
 }
 
 render();
-</script>
 
-</body>
-</html>
+
 
