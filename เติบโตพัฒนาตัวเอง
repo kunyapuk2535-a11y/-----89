@@ -407,9 +407,9 @@ function save(){
     document.getElementById("text").value="";
     render();
 }
-function deleteItem(index){
+function deleteItem(index)
 
-    let data = getData();
+
 
     data.splice(index,1);
 
