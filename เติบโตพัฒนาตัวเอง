@@ -447,20 +447,13 @@ function render(){
 
     filtered.forEach((item,index)=>{
 
-        let div = document.createElement("div");
-
-        div.className="item";
-
-        div.innerHTML = `
-
-            📅 ${item.date}<br>
-
-            ✨ ${item.text}<br><br>
-
-            <button onclick="deleteItem(${index})">🗑 ลบ</button>
-
-        `;
-
+       let div = document.createElement("div");
+div.className="item";
+div.innerHTML = `
+ <div class="date">📅 ${item.date}</div>
+  <div class="text">✨ ${item.text}</div>
+<button onclick="deleteItem(${index})">🗑 ลบ</button>
+`;
         list.appendChild(div);
 
     });
@@ -470,4 +463,4 @@ function render(){
 render();
 
 
-
+	
