@@ -57,7 +57,7 @@ button{
 .small{
     opacity:0.8;
     font-size:13px;
-    margin-top:10px;
+    margin-top:10px;ลบ
 }
 </style>
 </head>
